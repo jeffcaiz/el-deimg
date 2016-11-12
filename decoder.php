@@ -199,6 +199,9 @@ class ElectoneFat12 {
             if ($firstByte == 0x0 || $firstByte == 0x05 || $firstByte == 0x2e || $firstByte == 0xe5 || $firstByte == 0xf6) continue;
 
             $name = chop(substr($contentOfDirTable,$offset,8)) . '.' . chop(substr($contentOfDirTable,$offset+8,3));
+
+            if (strpos($name, "\0") !== FALSE) continue;
+
             $firstCluter = toInt16($contentOfDirTable,$offset+0x1a);
             $size = toInt32($contentOfDirTable,$offset + 0x1c);
 
